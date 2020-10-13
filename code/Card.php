@@ -23,10 +23,10 @@ class Card
 
     public function getValue(): int
     {
-        if($this->value === 1) {
+        if ($this->value === 1) {
             return self::ACE_VALUE;
         }
-        if($this->value >= 10) {
+        if ($this->value >= 10) {
             return self::FACE_VALUE;
         }
 
@@ -38,10 +38,11 @@ class Card
         return $this->value;
     }
 
-    public function getUnicodeCharacter(bool $includeColor=false): string {
-        $value = '&#'. ($this->suit->getStartValue() + $this->getRawValue()) .';';
+    public function getUnicodeCharacter(bool $includeColor = false): string
+    {
+        $value = '&#' . ($this->suit->getStartValue() + $this->getRawValue()) . ';';
 
-        if($includeColor) {
+        if ($includeColor) {
             $value = sprintf('<span style="color: %s;">%s</span>',
                 $this->suit->getColor(),
                 $value

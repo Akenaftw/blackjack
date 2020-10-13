@@ -19,11 +19,11 @@ $_SESSION["blackjack"] = $blackjack;
 $player = $blackjack->getplayer();
 $dealer = $blackjack->getDealer();
 
-var_dump($player-> hit());
+var_dump($player->hit());
 
 $deck = new Deck();
 $deck->shuffle();
-foreach($deck->getCards() AS $card) {
+foreach ($deck->getCards() as $card) {
     echo $card->getUnicodeCharacter(true);
     echo '<br>';
 }
@@ -46,19 +46,15 @@ foreach($deck->getCards() AS $card) {
 
 <section class="container">
 
-    <form method="post" action="index.php">
+    <form method="post" action="example.php">
 
-        <button type="submit" name="hit" class="btn btn-primary">Hit</button>
-        <button type="submit" name="stand" class="btn btn-primary">Stand</button>
-        <button type="submit" name="surrender" class="btn btn-primary">Surrender</button>
-
+        <input type="submit" name="hit" value="hit" class="btn btn-primary">Hit</button>
+        <input type="submit" name="stand" value="stand" class="btn btn-primary">Stand</input>
+        <input type="submit" name="surrender" value="surrender" class="btn btn-primary">Surrender</input>
 
     </form>
 
 </section>
-
-
-
 
 
 <!-- Optional JavaScript -->

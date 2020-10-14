@@ -12,11 +12,12 @@ class Blackjack
      */
     public function __construct()
     {
-        $deck = new Deck;
-        $deck->shuffle();
-        //this gets a specific
-        $this->player = new Player($deck);
-        $this->enemy = new Player($deck);
+        $this->deck = new Deck;
+        $this->deck->shuffle();
+        $this->player = new Player($this->deck);
+        $this->dealer = new Dealer($this->deck);
+        $_SESSION["blackjack"] = $this;
+
     }
 
     public function getplayer()
@@ -29,5 +30,26 @@ class Blackjack
         return $this->dealer;
     }
 
+    public function getDeck()
+    {
+        return $this->deck;
+    }
+
+    public function setPlayer($player)
+    {
+        $this->player = $player;
+    }
+
+
+    public function setDealer($dealer)
+    {
+        $this->dealer = $dealer;
+    }
+
+
+    public function setDeck($deck)
+    {
+        $this->deck = $deck;
+    }
 }
 

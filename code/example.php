@@ -13,25 +13,35 @@ require 'Blackjack.php';
 
 session_start();
 
-$blackjack = new Blackjack();
+if (!isset ($_SESSION["blackjack"])) {
+    $blackjack = new Blackjack();
+} else {
+    $blackjack = $_SESSION["blackjack"];
+}
 
-$_SESSION["blackjack"] = $blackjack;
+
 $player = $blackjack->getplayer();
 $dealer = $blackjack->getDealer();
 
-var_dump($player->hit());
-
-$deck = new Deck();
-$deck->shuffle();
-foreach ($deck->getCards() as $card) {
-    echo $card->getUnicodeCharacter(true);
-    echo '<br>';
+if (isset ($_POST["choice"])) {
+    if ($_POST["choice"] == "hit") {
+        $player->hit($blackjack->getDeck());
+    } elseif ($_POST["choice"] == "stand") {
+        $dealer->hit($blackjack->getDeck());
+    } elseif ($_POST["choice"] == "surrender") {
+        $player->surrender();
+    } else {
+        echo "something went wrong";
+    }
+}
+else{
+    echo "Please push a button";
 }
 
 ?>
 
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <title>Blackjack</title>
     <!-- Required meta tags -->
@@ -48,9 +58,9 @@ foreach ($deck->getCards() as $card) {
 
     <form method="post" action="example.php">
 
-        <input type="submit" name="hit" value="hit" class="btn btn-primary">Hit</button>
-        <input type="submit" name="stand" value="stand" class="btn btn-primary">Stand</input>
-        <input type="submit" name="surrender" value="surrender" class="btn btn-primary">Surrender</input>
+        <input type="submit" name="choice" value="hit">
+        <input type="submit" name="choice" value="stand">
+        <input type="submit" name="choice" value="surrender">
 
     </form>
 
